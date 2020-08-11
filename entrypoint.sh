@@ -17,17 +17,24 @@ then
 fi
 
 # verify qbit config
-if [ ! -f /config/qBittorrent/config ]
+if [ ! -d /config/qBittorrent/config ]
+then
+    echo "[info] Config directory not found, creating ..."
+    mkdir -p /config/qBittorrent/config
+fi
+
+# verify qbit config
+if [ ! -f /config/qBittorrent/configi/qBittorrent.conf ]
 then
     echo "[info] Config not found reverting to original."
-    cp /default/qBittorrent.conf /config/qBittorrent/config
+    cp /default/qBittorrent.conf /config/qBittorrent/config/
 fi
 
 # check if BINDPORT is set
 if [ ! -z "$BINDPORT" ]
 then
     echo "[info] Overriding BINDPORT to ${BINDPORT}"
-     sed -r -i "s/(PortRangeMin=)[^\"]+()/\1${BINDPORT}\2/" /config/qBittorrent/config/qBittorrent.conf
+    sed -r -i "s/(PortRangeMin=)[^\"]+()/\1${BINDPORT}\2/" /config/qBittorrent/config/qBittorrent.conf
 fi
 
 if [ -f /etc/wireguard/"$INTERFACE".conf ]
