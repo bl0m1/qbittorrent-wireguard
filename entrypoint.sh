@@ -17,17 +17,17 @@ then
 fi
 
 # verify qbit config
-if [ ! -f /root/.config/qBittorrent/qBittorrent.conf ]
+if [ ! -f /config/qBittorrent/config ]
 then
     echo "[info] Config not found reverting to original."
-    cp /default/qBittorrent.conf /root/.config/qBittorrent/qBittorrent.conf
+    cp /default/qBittorrent.conf /config/qBittorrent/config
 fi
 
 # check if BINDPORT is set
 if [ ! -z "$BINDPORT" ]
 then
     echo "[info] Overriding BINDPORT to ${BINDPORT}"
-     sed -r -i "s/(PortRangeMin=)[^\"]+()/\1${BINDPORT}\2/" /root/.config/qBittorrent/qBittorrent.conf
+     sed -r -i "s/(PortRangeMin=)[^\"]+()/\1${BINDPORT}\2/" /config/qBittorrent/config/qBittorrent.conf
 fi
 
 if [ -f /etc/wireguard/"$INTERFACE".conf ]
@@ -52,4 +52,4 @@ for lan_network_item in "${lan_network_list[@]}"; do
 done
 
 # start transmission
-/usr/bin/qbittorrent-nox --webui-port=${WEBUIPORT}
+/usr/bin/qbittorrent-nox --webui-port=${WEBUIPORT} --profile=/config
