@@ -6,7 +6,8 @@ RUN apk --no-cache add wireguard-tools iptables bash
 RUN apk --no-cache add qbittorrent-nox --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
 
 # copy placeholder config files and startup script from host
-COPY root/ /
+copy entrypoint.sh /entrypoint.sh
+COPY root/root/ /default
 
 RUN chmod 700 /entrypoint.sh
 
