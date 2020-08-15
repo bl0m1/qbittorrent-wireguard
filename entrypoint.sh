@@ -24,7 +24,7 @@ then
 fi
 
 # verify qbit config
-if [ ! -f /config/qBittorrent/configi/qBittorrent.conf ]
+if [ ! -f /config/qBittorrent/config/qBittorrent.conf ]
 then
     echo "[info] Config not found reverting to original."
     cp /default/qBittorrent.conf /config/qBittorrent/config/
