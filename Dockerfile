@@ -2,6 +2,8 @@ FROM ubuntu:20.04
 
 # Add curl
 RUN apt update -y
+RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y software-properties-common -y
+RUN add-apt-repository ppa:qbittorrent-team/qbittorrent-stable -y
 RUN DEBIAN_FRONTEND="noninteractive" apt install iptables iproute2 wireguard bash qbittorrent-nox openresolv net-tools -y
 
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
